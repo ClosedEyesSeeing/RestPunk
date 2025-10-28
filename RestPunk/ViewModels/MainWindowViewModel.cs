@@ -2,6 +2,11 @@
 {
     public partial class MainWindowViewModel : ViewModelBase
     {
-        public string Greeting { get; } = "Welcome to Avalonia!";
+        public SavedQueryViewModel SavedQueries { get; set; }
+
+        public MainWindowViewModel()
+        {
+            SavedQueries = new SavedQueryViewModel();
+        }
     }
 }

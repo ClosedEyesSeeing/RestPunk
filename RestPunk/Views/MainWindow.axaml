@@ -4,9 +4,10 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:viewmodels="using:RestPunk.ViewModels"
+        xmlns:controls="using:RestPunk.Controls"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="RestPunk.Views.MainWindow"
-        x:DataType="viewmodels:SavedQueryViewModel"
+        x:DataType="viewmodels:MainWindowViewModel"
         Icon="/Assets/avalonia-logo.ico"
         
         Title="RestPunk">
@@ -39,6 +40,8 @@
             <TextBlock/>
         </DockPanel>
 
+         
+
         <Grid Grid.Row="1">
 		    <Grid.ColumnDefinitions>
 			    <ColumnDefinition />
@@ -46,13 +49,7 @@
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
 
-            <TreeView Grid.Column="0" ItemsSource="{Binding QueryFolders}" >
-                <TreeView.ItemTemplate>
-                    <TreeDataTemplate ItemsSource="{Binding SavedQueries}">
-                      <TextBlock Text="{Binding Name}"/>
-                    </TreeDataTemplate>
-                </TreeView.ItemTemplate>
-            </TreeView>
+            <controls:QueryTree Grid.Column="0" DataContext="{Binding SavedQueries}" />
 
 		    <GridSplitter Grid.Column="1" />
 

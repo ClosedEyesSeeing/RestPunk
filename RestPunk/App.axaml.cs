@@ -25,7 +25,7 @@ namespace RestPunk
                 DisableAvaloniaDataAnnotationValidation();
                 desktop.MainWindow = new MainWindow
                 {
-                    DataContext = new SavedQueryViewModel(),
+                    DataContext = new MainWindowViewModel(),
                 };
             }
 
