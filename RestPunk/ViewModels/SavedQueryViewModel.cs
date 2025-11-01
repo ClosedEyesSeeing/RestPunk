@@ -12,29 +12,26 @@ namespace RestPunk.ViewModels
 {
     public class SavedQueryViewModel : ViewModelBase
     {
-        public ObservableCollection<ITreeItem> QueryFolders { get; set; }
+        public ObservableCollection<ITreeItem> QueryNodes { get; set; }
 
         public SavedQueryViewModel()
         {
-            QueryFolders = new ObservableCollection<ITreeItem>();
-            QueryFolders.Add(new QueryFolder
+            QueryNodes = new ObservableCollection<ITreeItem>();
+            QueryNodes.Add(new QueryFolder
             {
                 Name = "Test Folder",
-                SavedQueries = new ObservableCollection<SavedQuery>()
+                Children = new ObservableCollection<ITreeItem>()
                 {
                     new SavedQuery
                     {
                         Name = "Test query",
                         Uri = "https://www.restpunk.com",
                         HttpVerb = VerbType.Get
-                    }
-                },
-                ChildFolders = new ObservableCollection<QueryFolder>() 
-                { 
+                    },
                     new QueryFolder()
                     {
                         Name = "Child Folder",
-                        SavedQueries = new ObservableCollection<SavedQuery>()
+                        Children = new ObservableCollection<ITreeItem>()
                         {
                             new SavedQuery
                             {
@@ -45,6 +42,7 @@ namespace RestPunk.ViewModels
                         },
                     }
                 }
+               
             });
         }
     }

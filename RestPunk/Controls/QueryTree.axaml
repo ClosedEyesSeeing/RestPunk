@@ -10,12 +10,12 @@
     <Design.DataContext>
 		<viewmodels:SavedQueryViewModel />
     </Design.DataContext>
-  <TreeView ItemsSource="{Binding QueryFolders}" >
+  <TreeView ItemsSource="{Binding QueryNodes}" >
       
       <TreeView.DataTemplates>
     <!-- Folders: hierarchical (can contain folders and files) -->
     <TreeDataTemplate DataType="models:QueryFolder"
-                      ItemsSource="{Binding ChildFolders}">
+                      ItemsSource="{Binding Children}">
 
       <StackPanel Orientation="Horizontal" Spacing="6">
         <TextBlock Text="{Binding Name}"/>
@@ -28,11 +28,6 @@
         <TextBlock Text="{Binding Name}"/>
       </StackPanel>
     </DataTemplate>
-  </TreeView.DataTemplates>
-        <!--<TreeView.ItemTemplate>
-            <TreeDataTemplate ItemsSource="{Binding ChildFolders}">
-                <TextBlock Text="{Binding Name}"/>
-            </TreeDataTemplate>
-        </TreeView.ItemTemplate>-->
+  </TreeView.DataTemplates>        
     </TreeView>
 </UserControl>
