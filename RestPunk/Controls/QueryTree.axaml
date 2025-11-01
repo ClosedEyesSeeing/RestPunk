@@ -10,22 +10,28 @@
     <Design.DataContext>
 		<viewmodels:SavedQueryViewModel />
     </Design.DataContext>
-  <TreeView ItemsSource="{Binding QueryNodes}" >
-      
-      <TreeView.DataTemplates>
-    <!-- Folders: hierarchical (can contain folders and files) -->
+  <TreeView ItemsSource="{Binding QueryNodes}" x:CompileBindings="False" >
+    <TreeView.Styles>
+        <Style Selector="TreeViewItem">
+          <Setter Property="IsExpanded"
+                  Value="{Binding IsExpanded, Mode=TwoWay}" />
+        </Style>
+      </TreeView.Styles>
+
+  <TreeView.DataTemplates>
+    <!-- Folder header (no TreeViewItem here) -->
     <TreeDataTemplate DataType="models:QueryFolder"
                       ItemsSource="{Binding Children}">
-
       <StackPanel Orientation="Horizontal" Spacing="6">
-        <TextBlock Text="{Binding Name}"/>
+        <Image Source="{Binding Icon}" MaxHeight="25" />
+        <TextBlock Text="{Binding Name}" Padding="0,4,0,0"/>
       </StackPanel>
     </TreeDataTemplate>
 
     <!-- Files: leaf node -->
     <DataTemplate DataType="models:SavedQuery">
       <StackPanel Orientation="Horizontal" Spacing="6">
-        <TextBlock Text="{Binding Name}"/>
+        <TextBlock Text="{Binding}"/>
       </StackPanel>
     </DataTemplate>
   </TreeView.DataTemplates>        

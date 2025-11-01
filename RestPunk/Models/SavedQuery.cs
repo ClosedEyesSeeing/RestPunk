@@ -18,5 +18,12 @@ namespace RestPunk.Models
 
         public QueryBody Body { get; set; }
 
+        public bool IsExpanded { get; set; } = false;
+
+        public override string ToString()
+        {
+            return $"[{HttpVerb}] {Name}";
+        }
+
     }
 }

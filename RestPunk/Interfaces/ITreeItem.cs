@@ -6,8 +6,10 @@ using System.Threading.Tasks;
 
 namespace RestPunk.Interfaces
 {
-    public class ITreeItem
+    public interface ITreeItem
     {
         public string Name { get; set; }
+
+        public bool IsExpanded { get; set; }
     }
 }
