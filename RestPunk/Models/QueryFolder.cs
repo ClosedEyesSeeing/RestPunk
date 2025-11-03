@@ -17,7 +17,7 @@ namespace RestPunk.Models
     public class QueryFolder : INotifyPropertyChanged,  ITreeItem
     {
         public Guid Id { get; set; }
-        public string Name { get; set; }
+        public string Name { get; set; } = string.Empty;
 
         public ObservableCollection<ITreeItem> Children { get; set; } = new ObservableCollection<ITreeItem>();
 
@@ -25,7 +25,7 @@ namespace RestPunk.Models
         {
             get
             {
-                if (Application.Current.ActualThemeVariant == ThemeVariant.Dark)
+                if (Application.Current?.ActualThemeVariant == ThemeVariant.Dark)
                 {
                     if (IsExpanded)
                     {
@@ -57,7 +57,6 @@ namespace RestPunk.Models
             {
                 if (SetField(ref _isExpanded, value))
                 {
-                    // Also notify that Icon changed so the UI refreshes
                     PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Icon)));
                 }
             }

@@ -1,0 +1,86 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:controls="using:RestPunk.Controls"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:models="using:RestPunk.Models"
+             xmlns:viewmodels="using:RestPunk.ViewModels"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:DataType="viewmodels:QueryLayoutViewModel"
+             x:Class="RestPunk.QueryLayout">
+
+  <Grid>
+      <TabControl ItemsSource="{Binding Tabs}">
+          <TabControl.Styles>
+            <Style Selector="TabControl">
+                <Setter Property="Template">
+                <ControlTemplate>
+                    <Grid RowDefinitions="Auto,*"
+                        x:DataType="viewmodels:QueryLayoutViewModel">
+                    
+                    <Grid.DataContext>
+                        <Binding Path="DataContext"
+                                RelativeSource="{RelativeSource TemplatedParent}"/>
+                    </Grid.DataContext>
+
+                    <DockPanel>
+                        <TabStrip x:Name="tabStrip" ItemsSource="{TemplateBinding ItemsSource}"
+                                SelectedItem="{TemplateBinding SelectedItem}"
+                                ItemTemplate="{TemplateBinding ItemTemplate}"  
+                                
+                                ItemContainerTheme="{TemplateBinding ItemContainerTheme}"
+                                DockPanel.Dock="Left"/>
+
+                        
+                        <Button Content="+"
+                                Command="{Binding AddTabCommand}"
+                                MinWidth="28" FontSize="16"
+                                Margin="6,0,0,0"
+                                ToolTip.Tip="New tab (Ctrl+T)"
+                                DockPanel.Dock="Right"/>
+
+                        
+                    </DockPanel>
+
+                  
+                    <ContentPresenter Grid.Row="1"
+                                        Content="{Binding #tabStrip.SelectedItem}"
+                                        
+                                        Margin="8"/>
+                    </Grid>
+                </ControlTemplate>
+                </Setter>
+            </Style>
+
+            <Style Selector="TabItem /template/ ContentPresenter#PART_Header">
+                <Setter Property="Padding" Value="8,4"/>
+            </Style>
+            </TabControl.Styles>
+		  <TabControl.ContentTemplate>
+			  <DataTemplate DataType="viewmodels:QueryTabViewModel">
+				  <ContentPresenter DataContext="{Binding Content}" />
+              </DataTemplate>
+          </TabControl.ContentTemplate>
+          <TabControl.DataTemplates>
+			  <DataTemplate DataType="viewmodels:QueryBodyViewModel">
+				  <controls:QueryDisplay DataContext="{Binding}" />
+              </DataTemplate>
+          </TabControl.DataTemplates>
+          <TabControl.ItemTemplate>
+			  <DataTemplate>
+                  <StackPanel Orientation="Horizontal" Spacing="6">
+                    <TextBlock Text="{Binding Header}" VerticalAlignment="Center"/>
+                    <Button 
+                            Padding="3,0,0,0" MinWidth="20"
+                            ToolTip.Tip="Close tab"
+                            Command="{Binding $parent[TabControl].DataContext.CloseTabCommand}"
+                            CommandParameter="{Binding}">
+                    <Label FontSize="10">x</Label>
+                    </Button>
+                  </StackPanel>
+                </DataTemplate>
+          </TabControl.ItemTemplate>          
+    </TabControl>
+   
+  </Grid>
+</UserControl>
