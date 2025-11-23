@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace RestPunk.Models
 {
-    public class AuthorizationOptions
+    public enum AuthLocationEnum
     {
+        None = 0,
+        Header = 1,
+        QueryParam = 2
     }
 }

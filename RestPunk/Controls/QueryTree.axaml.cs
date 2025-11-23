@@ -10,4 +10,9 @@ public partial class QueryTree : UserControl
     {
         InitializeComponent();
     }
+
+    private void TreeView_SelectionChanged(object? sender, SelectionChangedEventArgs e)
+    {
+
+    }
 }

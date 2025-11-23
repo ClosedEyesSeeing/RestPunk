@@ -9,6 +9,22 @@ namespace RestPunk.ViewModels
 {
     public class QueryBodyViewModel
     {
+        public List<string> Verbs { get; } = VerbType.VerbTypes.ToList();
+
+        public SavedQuery Query { get; set; }
         public QueryBody QueryBody { get; set; }
+
+
+        public QueryBodyViewModel()
+        {
+            Query = new SavedQuery();
+        }
+
+        public QueryBodyViewModel(SavedQuery query)
+        {
+            Query = query;
+        }
+
+        
     }
 }

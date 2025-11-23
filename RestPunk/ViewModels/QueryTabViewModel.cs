@@ -10,7 +10,20 @@ namespace RestPunk.ViewModels
 {
     public class QueryTabViewModel : TabItem
     {
-        //public string Header { get; set; }
-        //public object? Content { get; set; }
+        public List<string> Verbs { get; set; }
+
+        public SavedQuery Query { get; set; }
+
+        public QueryTabViewModel()
+        {
+            Query = new SavedQuery();
+            Verbs = VerbType.VerbTypes.ToList();
+        }
+
+        public QueryTabViewModel(SavedQuery query)
+        {
+            Query = query;
+            Verbs = VerbType.VerbTypes.ToList();
+        }
     }
 }

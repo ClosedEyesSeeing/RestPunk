@@ -10,7 +10,9 @@
     <Design.DataContext>
 		<viewmodels:SavedQueryViewModel />
     </Design.DataContext>
-  <TreeView ItemsSource="{Binding QueryNodes}" x:CompileBindings="False" >
+  <TreeView ItemsSource="{Binding QueryNodes}" 
+            x:CompileBindings="False" 
+            SelectionChanged="TreeView_SelectionChanged">
     <TreeView.Styles>
         <Style Selector="TreeViewItem">
           <Setter Property="IsExpanded"

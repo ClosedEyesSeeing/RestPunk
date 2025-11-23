@@ -14,10 +14,11 @@ namespace RestPunk.Models
         public string Uri { get; set; }
         public string HttpVerb { get; set; }
 
-        public AuthorizationOptions AuthorizationOptions { get; set; }
-
+        public AuthorizationOption AuthorizationOption { get; set; }
+        public QueryParams Params { get; set; }
+        public QueryHeaders Headers { get; set; }
         public QueryBody Body { get; set; }
-
+        
         public bool IsExpanded { get; set; } = false;
 
         public override string ToString()
