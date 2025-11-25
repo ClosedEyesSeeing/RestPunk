@@ -11,6 +11,7 @@
 			<RowDefinition MaxHeight="50"/>
             <RowDefinition MaxHeight="50" />
             <RowDefinition />
+            <RowDefinition Height="3" />
             <RowDefinition />
         </Grid.RowDefinitions>
         <Grid Grid.Row="0">
@@ -19,7 +20,7 @@
                 <ColumnDefinition Width="15*"/>                
             </Grid.ColumnDefinitions>
             <TextBox Text="{Binding Query.Name}" Grid.Column="0" Margin="5" />
-            <Button Content="Save" Grid.Column="1" Click="Button_Click" />
+            <Button Content="Save" Grid.Column="1" />
         </Grid>
         <Grid Grid.Row="1">
 			<Grid.ColumnDefinitions>
@@ -38,7 +39,31 @@
                 </ComboBox.ItemTemplate>
             </ComboBox>
             <TextBox Text="{Binding Query.Uri}" Grid.Column="1" Margin="5" />
-            <Button Content="Send" Grid.Column="2" />
+            <Button Content="Send" Grid.Column="2" Command="{Binding OnSendRequest}" />
+        </Grid>
+        <Grid Grid.Row="2">
+			<TextBlock>This is where tabs for params/headers/auth goes</TextBlock>
+        </Grid>
+        <GridSplitter Grid.Row="3" Background="DarkSlateGray" />
+        <Grid Grid.Row="4" Margin="5,10,5,5" >
+            <Grid.RowDefinitions>
+				<RowDefinition Height="30" />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Left">
+                <TextBlock Text="Response Content:" />
+            </StackPanel>
+            <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Right">
+                <TextBlock Text="Status:  " />
+                <TextBlock Text="{Binding QueryResponse.StatusCode}" />
+                <TextBlock Padding="10,0,0,0" Text="Last Ran:  " />
+                <TextBlock Text="{Binding QueryResponse.DateRan}" />
+            </StackPanel>
+            <TextBox AcceptsReturn="True" Grid.Row="1"
+                     TextWrapping="WrapWithOverflow" 
+                     Text="{Binding QueryResponse.StringContent}">
+			
+            </TextBox>
         </Grid>
      </Grid>
 </UserControl>

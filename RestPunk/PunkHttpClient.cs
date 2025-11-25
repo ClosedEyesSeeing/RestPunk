@@ -12,11 +12,11 @@ namespace RestPunk
 {
     public class PunkHttpClient : HttpClient
     {
-        public async Task<string> SendRequestAsync(SavedQuery query)
+        public async Task<HttpResponseMessage> SendRequestAsync(SavedQuery query)
         {
             return await SendRequestAsync(query.HttpVerb, query.Uri, query.Body?.Body, query.Params?.Params, query.Headers?.Headers);
         }
-        public async Task<string> SendRequestAsync(string verb, string url, string body, List<Parameter> queryParams, List<Header> headers)
+        public async Task<HttpResponseMessage> SendRequestAsync(string verb, string url, string body, List<Parameter> queryParams, List<Header> headers)
         {
             var returnValue = string.Empty;
 
@@ -69,7 +69,7 @@ namespace RestPunk
             {
                 Method = method,
                 RequestUri = builder.Uri,
-                Content = new StringContent(body, Encoding.UTF8, "application/json")
+                Content = new StringContent(body ?? string.Empty, Encoding.UTF8, "application/json")
             };
 
             // Add headers
@@ -84,15 +84,17 @@ namespace RestPunk
             // Send
             HttpResponseMessage response = await client.SendAsync(request);
 
-            string responseBody = response.IsSuccessStatusCode ? await response.Content.ReadAsStringAsync() : string.Empty;
+            return response;
 
-            if (response.IsSuccessStatusCode)
-            {
-                // Read response
-                return responseBody;
-            }
+            //string responseBody = response.IsSuccessStatusCode ? await response.Content.ReadAsStringAsync() : string.Empty;
 
-            return $"Error: {response.StatusCode} - {responseBody}";
+            //if (response.IsSuccessStatusCode)
+            //{
+            //    // Read response
+            //    return responseBody;
+            //}
+
+            //return $"Error: {response.StatusCode} - {responseBody}";
         }
     }
 }

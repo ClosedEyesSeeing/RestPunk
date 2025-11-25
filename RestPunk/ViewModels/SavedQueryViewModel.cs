@@ -20,7 +20,6 @@ namespace RestPunk.ViewModels
         public ICommand OnAddQuery { get; }
         public ICommand OnAddFolder { get; }
 
-        public ICommand OnSendRequest { get; }
 
         public ObservableCollection<ITreeItem> QueryNodes { get; set; }
 
@@ -30,7 +29,6 @@ namespace RestPunk.ViewModels
 
             OnAddFolder = new PunkRelayCommand(AddFolder);
             OnAddQuery = new PunkRelayCommand(AddNewQuery);
-            OnSendRequest = new PunkRelayCommand(SendRequest);
 
             QueryNodes = new ObservableCollection<ITreeItem>();
             QueryNodes.Add(new QueryFolder
@@ -42,7 +40,7 @@ namespace RestPunk.ViewModels
                     {
                         Id = Guid.NewGuid(),
                         Name = "Test query",
-                        Uri = "https://www.restpunk.com",
+                        Uri = "https://jsonplaceholder.typicode.com/todos/1",//"https://www.restpunk.com",
                         HttpVerb = VerbType.Get
                     },
                     new QueryFolder()
@@ -64,16 +62,7 @@ namespace RestPunk.ViewModels
             });
         }
 
-        public async void SendRequest(object? _)
-        {
-            string retVal = string.Empty;
-            if (SelectedItem != null && SelectedItem is SavedQuery query)
-            {
-                PunkHttpClient client = new PunkHttpClient();
-                retVal = await client.SendRequestAsync(query);
-            }
-            //return retVal;
-        }
+        
 
         public void AddFolder(object? _)
         {

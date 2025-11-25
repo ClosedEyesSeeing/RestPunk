@@ -7,7 +7,7 @@ namespace RestPunk.ViewModels
     {
         public SavedQueryViewModel SavedQueries { get; set; }
 
-        public IBrush SliderColor { get; set; } = Brushes.DarkGray;
+        public IBrush SliderColor { get; set; } = Brushes.DarkSlateGray;
 
         public QueryLayoutViewModel QueryLayout { get; set; }
 
