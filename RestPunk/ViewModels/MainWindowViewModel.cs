@@ -13,8 +13,9 @@ namespace RestPunk.ViewModels
 
         public MainWindowViewModel()
         {
-            SavedQueries = new SavedQueryViewModel();
             QueryLayout = new QueryLayoutViewModel();
+            SavedQueries = new SavedQueryViewModel(QueryLayout);
+            
         }
     }
 }

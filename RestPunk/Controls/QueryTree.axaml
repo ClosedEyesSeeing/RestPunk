@@ -12,7 +12,7 @@
     </Design.DataContext>
   <TreeView ItemsSource="{Binding QueryNodes}" 
             x:CompileBindings="False" 
-            SelectionChanged="TreeView_SelectionChanged">
+            SelectionChanged="TreeView_SelectionChanged" >
     <TreeView.Styles>
         <Style Selector="TreeViewItem">
           <Setter Property="IsExpanded"
@@ -24,17 +24,17 @@
     <!-- Folder header (no TreeViewItem here) -->
     <TreeDataTemplate DataType="models:QueryFolder"
                       ItemsSource="{Binding Children}">
-      <StackPanel Orientation="Horizontal" Spacing="6">
-        <Image Source="{Binding Icon}" MaxHeight="25" />
-        <TextBlock Text="{Binding Name}" Padding="0,4,0,0"/>
-      </StackPanel>
+          <StackPanel Orientation="Horizontal" Spacing="6">
+            <Image Source="{Binding Icon}" MaxHeight="25" />
+            <TextBlock Text="{Binding Name}" Padding="0,4,0,0"/>
+          </StackPanel>
     </TreeDataTemplate>
 
     <!-- Files: leaf node -->
     <DataTemplate DataType="models:SavedQuery">
-      <StackPanel Orientation="Horizontal" Spacing="6">
-        <TextBlock Text="{Binding}"/>
-      </StackPanel>
+          <StackPanel Orientation="Horizontal" Spacing="6" DoubleTapped="TreeViewItem_DoubleTapped">
+            <TextBlock Text="{Binding}"/>
+          </StackPanel>
     </DataTemplate>
   </TreeView.DataTemplates>        
     </TreeView>

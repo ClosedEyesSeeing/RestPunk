@@ -1,5 +1,6 @@
 ﻿//using CommunityToolkit.Mvvm.Input;
 using Avalonia.Controls;
+using RestPunk.Models;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -14,11 +15,10 @@ namespace RestPunk.ViewModels
 {
     public class QueryLayoutViewModel : INotifyPropertyChanged
     {
-        public ObservableCollection<QueryTabViewModel> Tabs { get; } =
-            [
-                new() { Header = "Welcome", Content = "Hello from Avalonia!" },
-                new() { Header = "Test", Content = new QueryBodyViewModel() }
-            ];
+        PunkRelayCommand? _add;
+        PunkRelayCommand? _close;
+
+        public ObservableCollection<QueryTabViewModel> Tabs { get; } = new();
 
         private QueryTabViewModel? _selectedTab;
         public QueryTabViewModel? SelectedTab
@@ -43,20 +43,36 @@ namespace RestPunk.ViewModels
             if (Tabs.Count > 0) SelectedTab = Tabs[0];
         }
 
-        public ICommand AddTabCommand => _add ??= new PunkRelayCommand(_ =>
+        public void AddTab(SavedQuery query)
         {
-            var idx = Tabs.Count + 1;
-            var t = new QueryTabViewModel { Header = $"Unnamed {idx}", Content = new QueryBodyViewModel() };
-            Tabs.Add(t);
-            SelectedTab = t;
-        });
-        PunkRelayCommand? _add;
+            if (Tabs.FirstOrDefault(t => t.Query?.Id == query?.Id) != null) return;
 
+            var newTab = new QueryTabViewModel(query) { Header = $"{query.Name}", Content = new QueryBodyViewModel(query, this) };
+            Tabs.Add(newTab);
+            SelectedTab = newTab;
+        }
+
+        public ICommand AddTabCommand => _add ??= new PunkRelayCommand(tab =>
+        {
+            if (tab is not QueryTabViewModel savedTab)
+            {
+                var idx = Tabs.Count + 1;
+                var newTab = new QueryTabViewModel { Header = $"Unnamed {idx}", Content = new QueryBodyViewModel(this) };
+                Tabs.Add(newTab);
+                SelectedTab = newTab;
+            }
+            else
+            {
+                var newTab = new QueryTabViewModel { Header = $"{savedTab.Name}", Content = new QueryBodyViewModel(savedTab.Query, this), Query = savedTab.Query };
+                Tabs.Add(newTab);
+                SelectedTab = newTab;
+            }
+        });
         public ICommand CloseTabCommand => _close ??= new PunkRelayCommand(tab =>
         {
-            if (tab is not QueryTabViewModel t) return;
-            var wasSelected = ReferenceEquals(t, SelectedTab);
-            var index = Tabs.IndexOf(t);
+            if (tab is not QueryTabViewModel qtvm) return;
+            var wasSelected = ReferenceEquals(qtvm, SelectedTab);
+            var index = Tabs.IndexOf(qtvm);
             if (index < 0) return;
 
             Tabs.RemoveAt(index);
@@ -70,7 +86,6 @@ namespace RestPunk.ViewModels
                 SelectedTab = Tabs[newIndex];
             }
         });
-        PunkRelayCommand? _close;
         public event PropertyChangedEventHandler? PropertyChanged;
         void OnPropertyChanged([CallerMemberName] string? name = null)
         {

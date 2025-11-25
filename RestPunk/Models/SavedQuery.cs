@@ -9,7 +9,7 @@ namespace RestPunk.Models
 {
     public class SavedQuery : ITreeItem
     {
-        public Guid Id { get; set; }
+        public Guid Id { get; set; } = Guid.NewGuid();
         public string Name { get; set; }
         public string Uri { get; set; }
         public string HttpVerb { get; set; }
