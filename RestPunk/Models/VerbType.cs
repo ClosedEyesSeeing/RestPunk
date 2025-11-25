@@ -8,15 +8,26 @@ namespace RestPunk.Models
 {
     public static class VerbType
     {
-        public static string Get = "GET";
-        public static string Post = "POST";
-        public static string Put = "PUT";
-        public static string Delete = "DELETE";
-        public static string Patch = "PATCH";
-        public static string Head = "HEAD";
-        public static string Connect = "CONNECT";
-        public static string Options = "OPTIONS";
-        public static string Trace = "TRACE";
+        public static string Get = GetConst;
+        public static string Post = PostConst;
+        public static string Put = PutConst;
+        public static string Delete = DeleteConst;
+        public static string Patch = PatchConst;
+        public static string Head = HeadConst;
+        public static string Connect = ConnectConst;
+        public static string Options = OptionsConst;
+        public static string Trace = TraceConst;
+
+        public const string GetConst = "GET"; 
+        public const string PostConst = "POST";
+        public const string PutConst = "PUT";
+        public const string DeleteConst = "DELETE";
+        public const string PatchConst = "PATCH";
+        public const string HeadConst = "HEAD";
+        public const string ConnectConst = "CONNECT";
+        public const string OptionsConst = "OPTIONS";
+        public const string TraceConst = "TRACE";
+
 
         public static ICollection<string> VerbTypes = new List<string>
         {

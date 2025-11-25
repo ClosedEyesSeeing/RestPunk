@@ -17,7 +17,7 @@ namespace RestPunk.Models
     public class QueryFolder : INotifyPropertyChanged,  ITreeItem
     {
         public Guid Id { get; set; } = Guid.NewGuid();
-        public string Name { get; set; } = string.Empty;
+        public string Name { get; set; } = "New Folder";
 
         public ObservableCollection<ITreeItem> Children { get; set; } = new ObservableCollection<ITreeItem>();
 
@@ -46,7 +46,7 @@ namespace RestPunk.Models
             }
         }
 
-        private bool _isExpanded;
+        private bool _isExpanded = true;
 
         public event PropertyChangedEventHandler? PropertyChanged;
 

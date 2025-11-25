@@ -10,4 +10,8 @@ public partial class QueryDisplay : UserControl
     {
         InitializeComponent();
     }
+
+    private void Button_Click(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
+    {
+    }
 }

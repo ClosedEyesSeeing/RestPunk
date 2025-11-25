@@ -4,6 +4,7 @@ using RestPunk.Models;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,13 +15,22 @@ namespace RestPunk.ViewModels
 {
     public class SavedQueryViewModel : ViewModelBase
     {
-        public QueryLayoutViewModel queryLayoutViewModel;
+        public object? SelectedItem;
+        public QueryLayoutViewModel QueryLayoutViewModel;
+        public ICommand OnAddQuery { get; }
+        public ICommand OnAddFolder { get; }
+
+        public ICommand OnSendRequest { get; }
 
         public ObservableCollection<ITreeItem> QueryNodes { get; set; }
 
         public SavedQueryViewModel(QueryLayoutViewModel queryLayoutViewModel)
         {
-            this.queryLayoutViewModel = queryLayoutViewModel;
+            this.QueryLayoutViewModel = queryLayoutViewModel;
+
+            OnAddFolder = new PunkRelayCommand(AddFolder);
+            OnAddQuery = new PunkRelayCommand(AddNewQuery);
+            OnSendRequest = new PunkRelayCommand(SendRequest);
 
             QueryNodes = new ObservableCollection<ITreeItem>();
             QueryNodes.Add(new QueryFolder
@@ -52,6 +62,47 @@ namespace RestPunk.ViewModels
                 }
                
             });
+        }
+
+        public async void SendRequest(object? _)
+        {
+            string retVal = string.Empty;
+            if (SelectedItem != null && SelectedItem is SavedQuery query)
+            {
+                PunkHttpClient client = new PunkHttpClient();
+                retVal = await client.SendRequestAsync(query);
+            }
+            //return retVal;
+        }
+
+        public void AddFolder(object? _)
+        {
+            var newFolder = new QueryFolder();
+
+            if (SelectedItem != null && SelectedItem is QueryFolder folder)
+            {
+                folder.Children.Add(newFolder);
+            }
+            else
+            {
+                QueryNodes.Add(newFolder);
+            }
+        }
+
+        public void AddNewQuery(object? _)
+        {
+            var query = new SavedQuery();
+
+            if (SelectedItem != null && SelectedItem is QueryFolder folder)
+            {
+                folder.Children.Add(query);
+                QueryLayoutViewModel.AddTab(query);
+            }
+            else
+            {
+                QueryNodes.Add(query);
+                QueryLayoutViewModel.AddTab(query);
+            }
         }
     }
 }

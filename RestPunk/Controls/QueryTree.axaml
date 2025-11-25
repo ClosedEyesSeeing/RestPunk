@@ -10,7 +10,23 @@
     <Design.DataContext>
 		<viewmodels:SavedQueryViewModel />
     </Design.DataContext>
-  <TreeView ItemsSource="{Binding QueryNodes}" 
+    <Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="50" />
+			<RowDefinition />
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Horizontal" Grid.Row="0">
+			<DropDownButton Content="New +">
+                <DropDownButton.Flyout>
+                    <MenuFlyout>
+                        <MenuItem Header="New Folder" Command="{Binding OnAddFolder}" />
+                        <MenuItem Header="New Query"  Command="{Binding OnAddQuery}" />
+                    </MenuFlyout>
+                </DropDownButton.Flyout>
+            </DropDownButton>
+            <Button Content="Save Collection" />
+        </StackPanel>
+        <TreeView Grid.Row="1" ItemsSource="{Binding QueryNodes}" 
             x:CompileBindings="False" 
             SelectionChanged="TreeView_SelectionChanged" >
     <TreeView.Styles>
@@ -38,4 +54,6 @@
     </DataTemplate>
   </TreeView.DataTemplates>        
     </TreeView>
+    </Grid>
+  
 </UserControl>

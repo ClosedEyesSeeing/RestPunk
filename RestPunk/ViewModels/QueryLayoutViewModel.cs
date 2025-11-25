@@ -52,6 +52,8 @@ namespace RestPunk.ViewModels
             SelectedTab = newTab;
         }
 
+        
+
         public ICommand AddTabCommand => _add ??= new PunkRelayCommand(tab =>
         {
             if (tab is not QueryTabViewModel savedTab)
