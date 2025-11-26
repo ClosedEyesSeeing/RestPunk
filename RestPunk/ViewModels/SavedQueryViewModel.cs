@@ -25,7 +25,12 @@ namespace RestPunk.ViewModels
 
         public QueryCollection Collection { get; set; }
 
-        public ObservableCollection<ITreeItem> QueryNodes { get; set; }
+        private ObservableCollection<ITreeItem> queryNodes;
+        public ObservableCollection<ITreeItem> QueryNodes { get => queryNodes; set
+            {
+                SetProperty(ref queryNodes, value);
+            }
+        }
 
         public SavedQueryViewModel(QueryLayoutViewModel queryLayoutViewModel, QueryCollection collection = null)
         {
@@ -34,6 +39,7 @@ namespace RestPunk.ViewModels
             OnAddFolder = new PunkRelayCommand(AddFolder);
             OnAddQuery = new PunkRelayCommand(AddNewQuery);
             OnSaveCollection = new PunkRelayCommand(SaveCollection);
+            QueryLayoutViewModel.OnUpdateQuery = new PunkRelayCommand(UpdateQuery);
 
             QueryNodes = new ObservableCollection<ITreeItem>();
 
@@ -43,7 +49,46 @@ namespace RestPunk.ViewModels
             }
         }
 
-        
+        public void UpdateQuery(object? selectedItem)
+        {
+            if (selectedItem is SavedQuery query)
+            {
+                var node = QueryNodes.FirstOrDefault(n => n.Id == query.Id);
+                if (node != null && node is SavedQuery savedQuery)
+                {
+                    savedQuery.Copy(query);
+                }
+                else
+                {
+                    foreach(var folder in QueryNodes.Where(p => p is QueryFolder))
+                    {
+                        node = Find(folder, p => p.Id == query.Id && p is SavedQuery);
+                        if (node != null && node is SavedQuery sQuery)
+                        {
+                            sQuery.Copy(query);
+                        }
+                    }
+                }
+            }
+        }
+
+        private ITreeItem Find(ITreeItem currentNode, Func<ITreeItem, bool> idPredicate)
+        {
+            if (currentNode is QueryFolder folder)
+            {
+                var query = folder.Children.FirstOrDefault(idPredicate);
+                if (query != null)
+                {
+                    return query;
+                }
+                foreach(var childFolder in  folder.Children.Where(p => p is QueryFolder))
+                {
+                    query = Find(childFolder, idPredicate);
+                    if (query != null) return query;
+                }
+            }
+            return null;
+        }
 
         public void AddFolder(object? _)
         {

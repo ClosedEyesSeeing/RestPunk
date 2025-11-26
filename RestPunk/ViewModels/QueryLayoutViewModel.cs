@@ -13,10 +13,12 @@ using System.Windows.Input;
 
 namespace RestPunk.ViewModels
 {
-    public class QueryLayoutViewModel : INotifyPropertyChanged
+    public class QueryLayoutViewModel : ViewModelBase
     {
         PunkRelayCommand? _add;
         PunkRelayCommand? _close;
+
+        public PunkRelayCommand OnUpdateQuery;
 
         public ObservableCollection<QueryTabViewModel> Tabs { get; } = new();
 
@@ -27,9 +29,8 @@ namespace RestPunk.ViewModels
             set
             {
                 if (!ReferenceEquals(_selectedTab, value))
-                {
-                    _selectedTab = value;
-                    OnPropertyChanged();
+                {                   
+                    SetProperty(ref _selectedTab, value);
                     SelectedContent = value?.Content;
                     OnPropertyChanged("SelectedContent");
                 }
@@ -91,14 +92,11 @@ namespace RestPunk.ViewModels
 
         public void UpdateQuery(SavedQuery query)
         {
-
+            SelectedTab.Header = query.Name;
+            OnPropertyChanged("SelectedTab");
+            OnUpdateQuery?.Execute(query);
         }
 
-        public event PropertyChangedEventHandler? PropertyChanged;
-        void OnPropertyChanged([CallerMemberName] string? name = null)
-        {
-            
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
-        }
+        
     }
 }

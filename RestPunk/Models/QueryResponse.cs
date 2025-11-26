@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
@@ -7,12 +8,16 @@ using System.Threading.Tasks;
 
 namespace RestPunk.Models
 {
-    public class QueryResponse
+    public class QueryResponse : ObservableObject
     {
-        public string StringContent { get; set; }
-        public string StatusCode { get; set; }
-        public List<Header> Headers { get; set; }
-        public DateTime DateRan { get; set; }
+        private string _stringContent;
+        public string StringContent { get => _stringContent; set => SetProperty(ref _stringContent, value); }
+        private string _statusCode;
+        public string StatusCode { get => _statusCode; set => SetProperty(ref _statusCode, value); }
+        private List<Header> _headers;
+        public List<Header> Headers { get => _headers; set => SetProperty(ref _headers, value); }
+        private DateTime _dateRan;
+        public DateTime DateRan { get => _dateRan; set => SetProperty(ref _dateRan, value); }
 
         public QueryResponse()
         {

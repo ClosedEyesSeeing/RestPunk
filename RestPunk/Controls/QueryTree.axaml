@@ -56,7 +56,7 @@
     <!-- Files: leaf node -->
     <DataTemplate DataType="models:SavedQuery">
           <StackPanel Orientation="Horizontal" Spacing="6" DoubleTapped="TreeViewItem_DoubleTapped">
-            <TextBlock Text="{Binding}"/>
+            <TextBlock Text="{Binding DisplayName}"/>
           </StackPanel>
     </DataTemplate>
   </TreeView.DataTemplates>        

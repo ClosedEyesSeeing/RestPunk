@@ -10,7 +10,7 @@ using System.Windows.Input;
 
 namespace RestPunk.ViewModels
 {
-    public class QueryBodyViewModel : INotifyPropertyChanged
+    public class QueryBodyViewModel : ViewModelBase
     {
         private QueryLayoutViewModel parentViewModel;
 
@@ -76,7 +76,7 @@ namespace RestPunk.ViewModels
 
         public void UpdateQuery(object? _)
         {
-            
+            parentViewModel.UpdateQuery(Query);
         }
 
         public async void SendRequest(object? _)
@@ -95,11 +95,7 @@ namespace RestPunk.ViewModels
             //return retVal;
         }
 
-        void OnPropertyChanged([CallerMemberName] string? name = null)
-        {
-
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
-        }
+        
 
     }
 }

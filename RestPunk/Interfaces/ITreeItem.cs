@@ -14,6 +14,7 @@ namespace RestPunk.Interfaces
     [JsonDerivedType(typeof(SavedQuery), typeDiscriminator: "query")]
     public interface ITreeItem
     {
+        public Guid Id { get; set; }
         public string Name { get; set; }
 
         public bool IsExpanded { get; set; }
