@@ -88,6 +88,12 @@ namespace RestPunk.ViewModels
                 SelectedTab = Tabs[newIndex];
             }
         });
+
+        public void UpdateQuery(SavedQuery query)
+        {
+
+        }
+
         public event PropertyChangedEventHandler? PropertyChanged;
         void OnPropertyChanged([CallerMemberName] string? name = null)
         {

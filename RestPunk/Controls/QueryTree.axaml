@@ -15,17 +15,24 @@
 			<RowDefinition Height="50" />
 			<RowDefinition />
         </Grid.RowDefinitions>
-        <StackPanel Orientation="Horizontal" Grid.Row="0">
-			<DropDownButton Content="New +">
+			<DropDownButton Content="New +" HorizontalAlignment="Left" Grid.Row="0">
                 <DropDownButton.Flyout>
                     <MenuFlyout>
                         <MenuItem Header="New Folder" Command="{Binding OnAddFolder}" />
                         <MenuItem Header="New Query"  Command="{Binding OnAddQuery}" />
+                        <MenuItem Header="New Collection" Command="{Binding }"/>
                     </MenuFlyout>
                 </DropDownButton.Flyout>
             </DropDownButton>
-            <Button Content="Save Collection" />
-        </StackPanel>
+            <DropDownButton Content="Collection" HorizontalAlignment="Right" Grid.Row="0">
+                <DropDownButton.Flyout>
+                    <MenuFlyout>
+                        <MenuItem Header="Save" Command="{Binding OnSaveCollection }" />
+                        <MenuItem Header="Load"  Command="{Binding }" />
+                        <MenuItem Header="Export" Command="{Binding }" />
+                    </MenuFlyout>
+                </DropDownButton.Flyout>
+            </DropDownButton>
         <TreeView Grid.Row="1" ItemsSource="{Binding QueryNodes}" 
             x:CompileBindings="False" 
             SelectionChanged="TreeView_SelectionChanged" >

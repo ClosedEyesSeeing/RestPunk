@@ -12,7 +12,7 @@ namespace RestPunk.Models
         public Guid Id { get; set; } = Guid.NewGuid();
         public string Name { get; set; } = "New Query";
         public string Uri { get; set; }
-        public string HttpVerb { get; set; } = VerbType.Get;
+        public string HttpVerb { get; set; }
 
         public AuthorizationOption AuthorizationOption { get; set; }
         public QueryParams Params { get; set; }
@@ -20,6 +20,11 @@ namespace RestPunk.Models
         public QueryBody Body { get; set; }
         
         public bool IsExpanded { get; set; } = false;
+
+        public SavedQuery()
+        {
+            HttpVerb = VerbType.Get;
+        }
 
         public override string ToString()
         {

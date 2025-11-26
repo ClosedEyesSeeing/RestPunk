@@ -51,6 +51,7 @@ namespace RestPunk.ViewModels
         
 
         public ICommand OnSendRequest { get; }
+        public ICommand OnSaveCommand { get; }
 
         public event PropertyChangedEventHandler? PropertyChanged;
         
@@ -58,6 +59,7 @@ namespace RestPunk.ViewModels
         public QueryBodyViewModel()
         {
             OnSendRequest = new PunkRelayCommand(SendRequest);
+            OnSaveCommand = new PunkRelayCommand(UpdateQuery);
         }
 
         public QueryBodyViewModel(QueryLayoutViewModel parentVm) : this()
@@ -70,6 +72,11 @@ namespace RestPunk.ViewModels
         {
             parentViewModel = parentVm;
             Query = query;
+        }
+
+        public void UpdateQuery(object? _)
+        {
+            
         }
 
         public async void SendRequest(object? _)

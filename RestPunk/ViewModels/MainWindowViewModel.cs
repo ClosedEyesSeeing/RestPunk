@@ -1,5 +1,9 @@
-﻿using Avalonia.Media;
+﻿using Avalonia.Data;
+using Avalonia.Media;
+using RestPunk.Models;
 using System.Drawing;
+using System.IO;
+using System.Text.Json;
 
 namespace RestPunk.ViewModels
 {
@@ -14,7 +18,13 @@ namespace RestPunk.ViewModels
         public MainWindowViewModel()
         {
             QueryLayout = new QueryLayoutViewModel();
-            SavedQueries = new SavedQueryViewModel(QueryLayout);
+            string jsonIn = File.ReadAllText("defaultCollection.json");
+            var options = new JsonSerializerOptions
+            {
+                WriteIndented = true
+            };
+            QueryCollection? loadedCollection = JsonSerializer.Deserialize<QueryCollection>(jsonIn, options);
+            SavedQueries = new SavedQueryViewModel(QueryLayout, loadedCollection);
             
         }
     }
