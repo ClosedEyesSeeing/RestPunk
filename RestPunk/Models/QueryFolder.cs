@@ -2,6 +2,7 @@
 using Avalonia.Media.Imaging;
 using Avalonia.Platform;
 using Avalonia.Styling;
+using CommunityToolkit.Mvvm.ComponentModel;
 using RestPunk.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -14,10 +15,15 @@ using System.Threading.Tasks;
 
 namespace RestPunk.Models
 {
-    public class QueryFolder : INotifyPropertyChanged,  ITreeItem
+    public class QueryFolder : ObservableObject,  ITreeItem
     {
         public Guid Id { get; set; } = Guid.NewGuid();
-        public string Name { get; set; } = "New Folder";
+        private string _name = "New Folder";
+        public string Name
+        {
+            get => _name;
+            set => SetProperty(ref _name, value);
+        }
 
         public ObservableCollection<ITreeItem> Children { get; set; } = new ObservableCollection<ITreeItem>();
 

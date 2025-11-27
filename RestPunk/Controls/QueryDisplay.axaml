@@ -29,7 +29,7 @@
                 <ColumnDefinition Width="auto" MinWidth="50" />
             </Grid.ColumnDefinitions>
             <ComboBox Grid.Column="0" ItemsSource="{Binding Verbs}" 
-                      SelectedIndex="0"
+                      
                       SelectedValue="{Binding Query.HttpVerb}" 
                       Margin="5,0,0,0" Width="150" Height="30">
                 <ComboBox.ItemTemplate>

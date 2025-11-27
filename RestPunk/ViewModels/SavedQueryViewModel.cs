@@ -1,4 +1,5 @@
-﻿using CommunityToolkit.Mvvm.Input;
+﻿using Avalonia.Controls.ApplicationLifetimes;
+using CommunityToolkit.Mvvm.Input;
 using RestPunk.Interfaces;
 using RestPunk.Models;
 using System;
@@ -23,6 +24,8 @@ namespace RestPunk.ViewModels
         public ICommand OnAddFolder { get; }
         public ICommand OnSaveCollection { get; }
 
+        public ICommand OnRenameFolder { get; }
+
         public QueryCollection Collection { get; set; }
 
         private ObservableCollection<ITreeItem> queryNodes;
@@ -40,12 +43,31 @@ namespace RestPunk.ViewModels
             OnAddQuery = new PunkRelayCommand(AddNewQuery);
             OnSaveCollection = new PunkRelayCommand(SaveCollection);
             QueryLayoutViewModel.OnUpdateQuery = new PunkRelayCommand(UpdateQuery);
+            OnRenameFolder = new PunkRelayCommand(RenameFolder, (obj) => 
+            { 
+                return (SelectedItem is QueryFolder); 
+            });
 
             QueryNodes = new ObservableCollection<ITreeItem>();
 
             if (collection != null)
             {
                 QueryNodes = collection.Nodes;
+                Collection = collection;
+            }
+        }
+
+        public async void RenameFolder(object? obj)
+        {
+            if (SelectedItem is QueryFolder folder)
+            {
+                // TODO: Figure out editing name UI.
+                RenameWindow renameWindow = new RenameWindow(folder);
+                var mainWindow =
+                    (App.Current?.ApplicationLifetime as IClassicDesktopStyleApplicationLifetime)
+                    ?.MainWindow;
+                await renameWindow.ShowDialog(mainWindow);
+                folder.Name = renameWindow.ReturnValue;
             }
         }
 

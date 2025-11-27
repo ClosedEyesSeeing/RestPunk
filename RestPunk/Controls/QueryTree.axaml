@@ -13,6 +13,7 @@
     <Grid>
 		<Grid.RowDefinitions>
 			<RowDefinition Height="50" />
+            <RowDefinition Height="50" />
 			<RowDefinition />
         </Grid.RowDefinitions>
 			<DropDownButton Content="New +" HorizontalAlignment="Left" Grid.Row="0">
@@ -33,9 +34,17 @@
                     </MenuFlyout>
                 </DropDownButton.Flyout>
             </DropDownButton>
-        <TreeView Grid.Row="1" ItemsSource="{Binding QueryNodes}" 
+        <TextBlock Text="{Binding Collection.Name}" Grid.Row="1"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center"/>
+        <TreeView Grid.Row="2" ItemsSource="{Binding QueryNodes}" 
             x:CompileBindings="False" 
             SelectionChanged="TreeView_SelectionChanged" >
+            <TreeView.ContextMenu>
+				<ContextMenu>
+					<MenuItem Header="Rename" Command="{Binding OnRenameFolder}" />
+                </ContextMenu>
+            </TreeView.ContextMenu>
     <TreeView.Styles>
         <Style Selector="TreeViewItem">
           <Setter Property="IsExpanded"

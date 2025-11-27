@@ -1,0 +1,24 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="275" d:DesignHeight="80"
+        CanResize="False" Height="80" Width="275"
+        CanMaximize="False"
+        x:Class="RestPunk.RenameWindow"
+        Title="Rename Folder">
+  <Grid Margin="5">
+	  <Grid.RowDefinitions>
+		  <RowDefinition Height="30" />
+          <RowDefinition Height="40" />
+      </Grid.RowDefinitions>
+      <StackPanel Grid.Row="0" Orientation="Horizontal">
+		  <Label>Name:</Label>
+          <TextBox x:Name="folderNameBox" Width="200" />
+      </StackPanel>
+      <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center">
+		  <Button x:Name="saveButton" Content="Save" Click="saveButton_Click" />
+          <Button x:Name="cancelButton" Content="Cancel" Click="cancelButton_Click" />
+      </StackPanel>
+  </Grid>
+</Window>
