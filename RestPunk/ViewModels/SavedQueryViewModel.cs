@@ -42,8 +42,8 @@ namespace RestPunk.ViewModels
             OnAddFolder = new PunkRelayCommand(AddFolder);
             OnAddQuery = new PunkRelayCommand(AddNewQuery);
             OnSaveCollection = new PunkRelayCommand(SaveCollection);
-            QueryLayoutViewModel.OnUpdateQuery = new PunkRelayCommand(UpdateQuery);
-            OnRenameFolder = new PunkRelayCommand(RenameFolder, (obj) => 
+            QueryLayoutViewModel.OnUpdateQuery = new PunkRelayCommand(UpdateQuery);			
+			OnRenameFolder = new PunkRelayCommand(RenameFolder, (obj) => 
             { 
                 return (SelectedItem is QueryFolder); 
             });
@@ -71,7 +71,15 @@ namespace RestPunk.ViewModels
             }
         }
 
-        public void UpdateQuery(object? selectedItem)
+		public void AddOtherQuery(object? newQuery)
+		{
+			if (newQuery is SavedQuery query)
+			{
+                queryNodes.Add(query);				
+			}
+		}
+
+		public void UpdateQuery(object? selectedItem)
         {
             if (selectedItem is SavedQuery query)
             {
@@ -88,8 +96,13 @@ namespace RestPunk.ViewModels
                         if (node != null && node is SavedQuery sQuery)
                         {
                             sQuery.Copy(query);
-                        }
+                            break;
+                        }                        
                     }
+                }
+                if (node == null)
+                {
+                    AddOtherQuery(query);
                 }
             }
         }
@@ -160,14 +173,13 @@ namespace RestPunk.ViewModels
             var options = new JsonSerializerOptions
             {
                 WriteIndented = true,
-                // If you have circular references or weird objects:
+                // NOTE: If circular references or weird objects are needed in the futrue, uncomment this:
                 // ReferenceHandler = ReferenceHandler.IgnoreCycles
             };
-
-            // Convert to JSON string
+            
             string json = JsonSerializer.Serialize(Collection, options);
 
-            // Write to a file
+            // TODO: Use ConfigManager to get default path
             if (string.IsNullOrWhiteSpace(path))
                 path = "defaultCollection.json";
 

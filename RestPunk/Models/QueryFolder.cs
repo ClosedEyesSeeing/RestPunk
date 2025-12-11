@@ -11,6 +11,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace RestPunk.Models
@@ -27,6 +28,7 @@ namespace RestPunk.Models
 
         public ObservableCollection<ITreeItem> Children { get; set; } = new ObservableCollection<ITreeItem>();
 
+        [JsonIgnore]
         public Bitmap Icon
         {
             get
@@ -52,28 +54,18 @@ namespace RestPunk.Models
             }
         }
 
-        private bool _isExpanded = true;
-
-        public event PropertyChangedEventHandler? OtherPropertyChanged;
+        private bool _isExpanded = true;        
 
         public bool IsExpanded
         {
             get => _isExpanded;
             set
             {
-                if (SetField(ref _isExpanded, value))
+                if (SetProperty(ref _isExpanded, value))
                 {
-                    OtherPropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Icon)));
+                    OnPropertyChanged(nameof(Icon));                    
                 }
             }
-        }
-
-        protected bool SetField<T>(ref T field, T value, [CallerMemberName] string? propName = null)
-        {
-            if (Equals(field, value)) return false;
-            field = value;
-            OtherPropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propName));
-            return true;
-        }
+        }        
     }
 }

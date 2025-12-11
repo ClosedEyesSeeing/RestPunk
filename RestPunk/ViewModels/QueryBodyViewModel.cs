@@ -25,9 +25,7 @@ namespace RestPunk.ViewModels
                 if (!ReferenceEquals(queryBody, value))
                 {
                     queryBody = value;
-                    OnPropertyChanged();
-                    //SelectedContent = value?.Content;
-                    //OnPropertyChanged("SelectedContent");
+                    OnPropertyChanged();                    
                 }
             } 
         }
@@ -41,9 +39,7 @@ namespace RestPunk.ViewModels
                 if (!ReferenceEquals(queryResponse, value))
                 {
                     queryResponse = value;
-                    OnPropertyChanged();
-                    //SelectedContent = value?.Content;
-                    //OnPropertyChanged("SelectedContent");
+                    OnPropertyChanged();                    
                 }
             }
         }

@@ -2,6 +2,7 @@
 using Avalonia.Controls;
 using RestPunk.Models;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -18,9 +19,9 @@ namespace RestPunk.ViewModels
         PunkRelayCommand? _add;
         PunkRelayCommand? _close;
 
-        public PunkRelayCommand OnUpdateQuery;
+        public PunkRelayCommand OnUpdateQuery;		
 
-        public ObservableCollection<QueryTabViewModel> Tabs { get; } = new();
+		public ObservableCollection<QueryTabViewModel> Tabs { get; } = new();
 
         private QueryTabViewModel? _selectedTab;
         public QueryTabViewModel? SelectedTab
@@ -50,7 +51,7 @@ namespace RestPunk.ViewModels
 
             var newTab = new QueryTabViewModel(query) { Header = $"{query.Name}", Content = new QueryBodyViewModel(query, this) };
             Tabs.Add(newTab);
-            SelectedTab = newTab;
+            SelectedTab = newTab;            
         }
 
         
@@ -63,7 +64,9 @@ namespace RestPunk.ViewModels
                 var newTab = new QueryTabViewModel { Header = $"Unnamed {idx}", Content = new QueryBodyViewModel(this) };
                 Tabs.Add(newTab);
                 SelectedTab = newTab;
-            }
+
+				//TabAddedQuery(newTab.Query);
+			}
             else
             {
                 var newTab = new QueryTabViewModel { Header = $"{savedTab.Name}", Content = new QueryBodyViewModel(savedTab.Query, this), Query = savedTab.Query };
@@ -95,8 +98,6 @@ namespace RestPunk.ViewModels
             SelectedTab.Header = query.Name;
             OnPropertyChanged("SelectedTab");
             OnUpdateQuery?.Execute(query);
-        }
-
-        
-    }
+        }		
+	}
 }

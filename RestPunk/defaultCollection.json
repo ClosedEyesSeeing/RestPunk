@@ -39,29 +39,7 @@
               "DisplayName": "[POST] Test query 2"
             }
           ],
-          "Icon": {
-            "Dpi": {
-              "X": 96,
-              "Y": 96,
-              "Length": 135.7645019878171,
-              "SquaredLength": 18432
-            },
-            "Size": {
-              "AspectRatio": 1,
-              "Width": 150,
-              "Height": 150
-            },
-            "PixelSize": {
-              "AspectRatio": 1,
-              "Width": 150,
-              "Height": 150
-            },
-            "Format": {
-              "BitsPerPixel": 32
-            },
-            "AlphaFormat": 0
-          },
-          "IsExpanded": true
+          "IsExpanded": false
         },
         {
           "$type": "folder",
@@ -82,53 +60,9 @@
               "DisplayName": "[PUT] New Query"
             }
           ],
-          "Icon": {
-            "Dpi": {
-              "X": 96,
-              "Y": 96,
-              "Length": 135.7645019878171,
-              "SquaredLength": 18432
-            },
-            "Size": {
-              "AspectRatio": 1,
-              "Width": 150,
-              "Height": 150
-            },
-            "PixelSize": {
-              "AspectRatio": 1,
-              "Width": 150,
-              "Height": 150
-            },
-            "Format": {
-              "BitsPerPixel": 32
-            },
-            "AlphaFormat": 0
-          },
           "IsExpanded": true
         }
       ],
-      "Icon": {
-        "Dpi": {
-          "X": 96,
-          "Y": 96,
-          "Length": 135.7645019878171,
-          "SquaredLength": 18432
-        },
-        "Size": {
-          "AspectRatio": 1,
-          "Width": 150,
-          "Height": 150
-        },
-        "PixelSize": {
-          "AspectRatio": 1,
-          "Width": 150,
-          "Height": 150
-        },
-        "Format": {
-          "BitsPerPixel": 32
-        },
-        "AlphaFormat": 0
-      },
       "IsExpanded": true
     },
     {
