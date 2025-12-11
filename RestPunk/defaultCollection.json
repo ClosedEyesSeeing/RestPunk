@@ -1,1 +1,148 @@
-﻿
+﻿{
+  "Id": "4576056c-baf1-4a6c-bcce-0af42be5568a",
+  "Name": "Default Collection",
+  "Nodes": [
+    {
+      "$type": "folder",
+      "Id": "b0b5456c-08b1-4f20-9f4f-384cbb984d46",
+      "Name": "Test Folder",
+      "Children": [
+        {
+          "$type": "query",
+          "Id": "f113266b-85b5-4c26-8ae9-90dd4387e94c",
+          "Name": "Test query",
+          "Uri": "https://jsonplaceholder.typicode.com/todos/1",
+          "HttpVerb": "GET",
+          "AuthorizationOption": null,
+          "Params": null,
+          "Headers": null,
+          "Body": null,
+          "IsExpanded": false,
+          "DisplayName": "[GET] Test query"
+        },
+        {
+          "$type": "folder",
+          "Id": "352af338-53ac-411a-9da9-3b56c708d696",
+          "Name": "Child Folder",
+          "Children": [
+            {
+              "$type": "query",
+              "Id": "14c4a3fe-bc00-4918-bfce-6897ddcfe0df",
+              "Name": "Test query 2",
+              "Uri": "https://www.restpunk.com",
+              "HttpVerb": "POST",
+              "AuthorizationOption": null,
+              "Params": null,
+              "Headers": null,
+              "Body": null,
+              "IsExpanded": false,
+              "DisplayName": "[POST] Test query 2"
+            }
+          ],
+          "Icon": {
+            "Dpi": {
+              "X": 96,
+              "Y": 96,
+              "Length": 135.7645019878171,
+              "SquaredLength": 18432
+            },
+            "Size": {
+              "AspectRatio": 1,
+              "Width": 150,
+              "Height": 150
+            },
+            "PixelSize": {
+              "AspectRatio": 1,
+              "Width": 150,
+              "Height": 150
+            },
+            "Format": {
+              "BitsPerPixel": 32
+            },
+            "AlphaFormat": 0
+          },
+          "IsExpanded": true
+        },
+        {
+          "$type": "folder",
+          "Id": "278ba44b-8ab0-4287-bdf3-c86b72b3f689",
+          "Name": "IT WORKED!",
+          "Children": [
+            {
+              "$type": "query",
+              "Id": "63b87450-a6a5-4192-98f9-dc9787f3618a",
+              "Name": "New Query",
+              "Uri": null,
+              "HttpVerb": "PUT",
+              "AuthorizationOption": null,
+              "Params": null,
+              "Headers": null,
+              "Body": null,
+              "IsExpanded": false,
+              "DisplayName": "[PUT] New Query"
+            }
+          ],
+          "Icon": {
+            "Dpi": {
+              "X": 96,
+              "Y": 96,
+              "Length": 135.7645019878171,
+              "SquaredLength": 18432
+            },
+            "Size": {
+              "AspectRatio": 1,
+              "Width": 150,
+              "Height": 150
+            },
+            "PixelSize": {
+              "AspectRatio": 1,
+              "Width": 150,
+              "Height": 150
+            },
+            "Format": {
+              "BitsPerPixel": 32
+            },
+            "AlphaFormat": 0
+          },
+          "IsExpanded": true
+        }
+      ],
+      "Icon": {
+        "Dpi": {
+          "X": 96,
+          "Y": 96,
+          "Length": 135.7645019878171,
+          "SquaredLength": 18432
+        },
+        "Size": {
+          "AspectRatio": 1,
+          "Width": 150,
+          "Height": 150
+        },
+        "PixelSize": {
+          "AspectRatio": 1,
+          "Width": 150,
+          "Height": 150
+        },
+        "Format": {
+          "BitsPerPixel": 32
+        },
+        "AlphaFormat": 0
+      },
+      "IsExpanded": true
+    },
+    {
+      "$type": "query",
+      "Id": "4ffdbe56-7c02-4535-abfd-f45178241d98",
+      "Name": "Another new",
+      "Uri": null,
+      "HttpVerb": "DELETE",
+      "AuthorizationOption": null,
+      "Params": null,
+      "Headers": null,
+      "Body": null,
+      "IsExpanded": false,
+      "DisplayName": "[DELETE] Another new"
+    }
+  ]
+}

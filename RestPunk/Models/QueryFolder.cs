@@ -54,7 +54,7 @@ namespace RestPunk.Models
 
         private bool _isExpanded = true;
 
-        public event PropertyChangedEventHandler? PropertyChanged;
+        public event PropertyChangedEventHandler? OtherPropertyChanged;
 
         public bool IsExpanded
         {
@@ -63,7 +63,7 @@ namespace RestPunk.Models
             {
                 if (SetField(ref _isExpanded, value))
                 {
-                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Icon)));
+                    OtherPropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Icon)));
                 }
             }
         }
@@ -72,7 +72,7 @@ namespace RestPunk.Models
         {
             if (Equals(field, value)) return false;
             field = value;
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propName));
+            OtherPropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propName));
             return true;
         }
     }
