@@ -10,9 +10,9 @@
              x:Class="RestPunk.QueryLayout">
 
   <Grid>
-      <TabControl ItemsSource="{Binding Tabs}">
+      <TabControl ItemsSource="{Binding Tabs}" Classes="outter">
           <TabControl.Styles>
-            <Style Selector="TabControl">
+            <Style Selector="TabControl.outter">
                 <Setter Property="Template">
                 <ControlTemplate>
                     <Grid RowDefinitions="Auto,*"

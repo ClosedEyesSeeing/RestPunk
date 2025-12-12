@@ -3,13 +3,80 @@
              x:Class="RestPunk.App"
              xmlns:local="using:RestPunk"
              RequestedThemeVariant="Default">
-             <!-- "Default" ThemeVariant follows system theme variant. "Dark" or "Light" are other available options. -->
-
+             
     <Application.DataTemplates>
         <local:ViewLocator/>
-    </Application.DataTemplates>
+    </Application.DataTemplates>    
+
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.ThemeDictionaries>
+                <ResourceDictionary x:Key="Light">
+                    <Color x:Key="SplitterBg">#12000000</Color>
+                    <Color x:Key="SplitterBgHover">#1E000000</Color>
+                    <Color x:Key="SplitterGrip">#66000000</Color>
+                    <Color x:Key="SplitterGripHover">#80000000</Color>
+                </ResourceDictionary>
+
+                <ResourceDictionary x:Key="Dark">
+                    <Color x:Key="SplitterBg">#14FFFFFF</Color>
+                    <Color x:Key="SplitterBgHover">#22FFFFFF</Color>
+                    <Color x:Key="SplitterGrip">#66FFFFFF</Color>
+                    <Color x:Key="SplitterGripHover">#80FFFFFF</Color>
+                </ResourceDictionary>
+            </ResourceDictionary.ThemeDictionaries>
+        </ResourceDictionary>
+    </Application.Resources>
   
     <Application.Styles>
         <FluentTheme />
+        
+        <Style Selector="GridSplitter.pretty-splitter.vertical">
+            <Setter Property="Cursor" Value="SizeWestEast"/>
+            <Setter Property="Template">
+                <ControlTemplate>
+                    <Border x:Name="PART_Back"
+                        CornerRadius="4"
+                        Background="{DynamicResource SplitterBg}">
+                        <StackPanel Spacing="2"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center">
+                        <Ellipse Width="3" Height="3" Fill="{DynamicResource SplitterGrip}"/>
+                        <Ellipse Width="3" Height="3" Fill="{DynamicResource SplitterGrip}"/>
+                        <Ellipse Width="3" Height="3" Fill="{DynamicResource SplitterGrip}"/>
+                        </StackPanel>
+                    </Border>
+                </ControlTemplate>
+            </Setter>
+        </Style>
+        
+        <Style Selector="GridSplitter.pretty-splitter.horizontal">
+            <Setter Property="Cursor" Value="SizeNorthSouth"/>
+            <Setter Property="Template">
+                <ControlTemplate>
+                    <Border x:Name="PART_Back"
+                        CornerRadius="4"
+                        Background="{DynamicResource SplitterBg}">
+                        <StackPanel Orientation="Horizontal"
+                            Spacing="2"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center">
+                        <Ellipse Width="3" Height="3" Fill="{DynamicResource SplitterGrip}"/>
+                        <Ellipse Width="3" Height="3" Fill="{DynamicResource SplitterGrip}"/>
+                        <Ellipse Width="3" Height="3" Fill="{DynamicResource SplitterGrip}"/>
+                        </StackPanel>
+                    </Border>
+                </ControlTemplate>
+            </Setter>
+        </Style>
+
+        <Style Selector="GridSplitter.pretty-splitter:pointerover /template/ Border#PART_Back">
+            <Setter Property="Background" Value="{DynamicResource SplitterBgHover}"/>
+        </Style>
+
+        <Style Selector="GridSplitter.pretty-splitter:pointerover /template/ Ellipse">
+            <Setter Property="Fill" Value="{DynamicResource SplitterGripHover}"/>
+        </Style>
+
     </Application.Styles>
 </Application>

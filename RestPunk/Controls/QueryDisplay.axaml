@@ -3,6 +3,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:viewmodels="using:RestPunk.ViewModels"
+             xmlns:controls="using:RestPunk.Controls"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:DataType="viewmodels:QueryBodyViewModel"
              x:Class="RestPunk.Controls.QueryDisplay">
@@ -41,10 +42,26 @@
             <TextBox Text="{Binding Query.Uri}" Grid.Column="1" Margin="5,1,5,0" />
             <Button Content="Send" Grid.Column="2" Command="{Binding OnSendRequest}" />
         </Grid>
-        <Grid Grid.Row="2">
-			<TextBlock>This is where tabs for params/headers/auth goes</TextBlock>
+        <Grid Grid.Row="2" Margin="0,0,0,10">
+			<TabControl>
+				<TabItem Header="Auth">                    
+                    <controls:AuthSettings DataContext="{Binding AuthSettingsViewModel}" />                    
+                </TabItem>
+                <TabItem Header="Params">
+                </TabItem>
+                <TabItem Header="Headers">
+                </TabItem>
+                <TabItem Header="Body">
+                </TabItem>
+            </TabControl>
         </Grid>
-        <GridSplitter Grid.Row="3" Background="DarkSlateGray" />
+        <!--<GridSplitter Grid.Row="3" Background="DarkSlateGray" />-->
+        <GridSplitter Grid.Row="3"
+              Classes="pretty-splitter horizontal"
+              Height="8"
+              ResizeDirection="Rows"
+              ResizeBehavior="PreviousAndNext"
+              />
         <Grid Grid.Row="4" Margin="5,10,5,5" >
             <Grid.RowDefinitions>
 				<RowDefinition Height="30" />

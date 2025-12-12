@@ -18,6 +18,8 @@ namespace RestPunk.ViewModels
 
         public SavedQuery Query { get; set; }
 
+        public AuthSettingsViewModel AuthSettingsViewModel { get; private set; } = new AuthSettingsViewModel();
+
         private string queryBody;
         public string QueryBody { get => queryBody; 
             set 

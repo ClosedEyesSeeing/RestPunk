@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Avalonia;
+using Avalonia.Styling;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -10,8 +12,14 @@ namespace RestPunk
 {
     public class ConfigurationManager
     {
+		public static bool IsDarkTheme => Application.Current?.ActualThemeVariant == ThemeVariant.Dark;
 
 		public Config Configuration { get; private set; } = new Config();
+
+		public static JsonSerializerOptions JsonOptions = new JsonSerializerOptions
+		{
+			WriteIndented = true
+		};
 
 		public ConfigurationManager(string pathToConfig = ".\\appSettings.json")
 		{
@@ -54,9 +62,9 @@ namespace RestPunk
 		}
 
 		public void Save()
-		{
-			var configJson = JsonSerializer.Serialize(Configuration);
+		{			
+			var configJson = JsonSerializer.Serialize(Configuration, JsonOptions);
 			File.WriteAllText("appSettings.json", configJson);
-		}
+		}		
 	}
 }

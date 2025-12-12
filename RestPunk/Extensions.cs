@@ -22,5 +22,10 @@ namespace RestPunk
                     break;
             }
         }
-    }
+
+		public static string ParseThemeVariant(this ThemeVariant variant)
+		{
+			return variant == ThemeVariant.Light ? nameof(ThemeVariant.Light) : nameof(ThemeVariant.Dark);
+		}
+	}
 }

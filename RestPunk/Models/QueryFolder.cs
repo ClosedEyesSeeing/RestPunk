@@ -4,6 +4,7 @@ using Avalonia.Platform;
 using Avalonia.Styling;
 using CommunityToolkit.Mvvm.ComponentModel;
 using RestPunk.Interfaces;
+using RestPunk.Observers;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -33,23 +34,17 @@ namespace RestPunk.Models
         {
             get
             {
-                if (Application.Current?.ActualThemeVariant == ThemeVariant.Dark)
-                {
-                    if (IsExpanded)
-                    {
-                        return new Bitmap(AssetLoader.Open(new Uri("avares://RestPunk/Assets/Icons/Inverted/folder-open-solid-full.png")));
-                    }
-
-                    return new Bitmap(AssetLoader.Open(new Uri("avares://RestPunk/Assets/Icons/Inverted/folder-solid-full.png")));
+                if (ConfigurationManager.IsDarkTheme)
+                {                    
+                    return IsExpanded ?
+                        new Bitmap(AssetLoader.Open(new Uri("avares://RestPunk/Assets/Icons/Inverted/folder-open-solid-full.png")))
+                        : new Bitmap(AssetLoader.Open(new Uri("avares://RestPunk/Assets/Icons/Inverted/folder-solid-full.png")));                    
                 }
                 else
                 {
-                    if (IsExpanded)
-                    {
-                        return new Bitmap(AssetLoader.Open(new Uri("avares://RestPunk/Assets/Icons/folder-open-solid-full.png")));
-                    }
-
-                    return new Bitmap(AssetLoader.Open(new Uri("avares://RestPunk/Assets/Icons/folder-solid-full.png")));
+                    return IsExpanded ? 
+                        new Bitmap(AssetLoader.Open(new Uri("avares://RestPunk/Assets/Icons/folder-open-solid-full.png")))
+                        : new Bitmap(AssetLoader.Open(new Uri("avares://RestPunk/Assets/Icons/folder-solid-full.png"))); 					
                 }
             }
         }
@@ -66,6 +61,15 @@ namespace RestPunk.Models
                     OnPropertyChanged(nameof(Icon));                    
                 }
             }
-        }        
+        }   
+        
+        public QueryFolder()
+        {
+			var themeChangeObservable = Application.Current.GetObservable(Application.ActualThemeVariantProperty);
+            themeChangeObservable.Subscribe(new ThemeObserver(() =>
+            {
+                OnPropertyChanged(nameof(Icon)); 
+            }));
+		}
     }
 }

@@ -5,19 +5,19 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:restpunk="using:RestPunk"
         xmlns:viewmodels="using:RestPunk.ViewModels"
-        xmlns:controls="using:RestPunk.Controls"
+        xmlns:controls="using:RestPunk.Controls"        
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="RestPunk.Views.MainWindow"
         x:DataType="viewmodels:MainWindowViewModel"
-        Icon="/Assets/icon-32.ico"        
+        Icon="/Assets/icon-32.ico"              
+        Closing="Window_Closing"
         Title="RestPunk">
 
     <Design.DataContext>
         <!-- This only sets the DataContext for the previewer in an IDE,
              to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
         <viewmodels:MainWindowViewModel/>
-    </Design.DataContext>
-    
+    </Design.DataContext>        
 
      <Grid>
         <Grid.RowDefinitions>
@@ -37,7 +37,7 @@
                 <MenuItem Header="Paste"/>
                 </MenuItem>
 				<MenuItem Header="_Settings">
-					<MenuItem Header="_Theme Toggle" Click="ThemeMenuItem_Click" />
+					<MenuItem Header="_Theme Toggle" Command="{Binding OnToggleTheme}" />
 				</MenuItem>
             </Menu>
             <TextBlock/>
@@ -52,9 +52,16 @@
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
 
-            <controls:QueryTree Grid.Column="0" DataContext="{Binding SavedQueries}" />
+            <controls:QueryTree Grid.Column="0" DataContext="{Binding SavedQueries}" Margin="5" />
 
-		    <GridSplitter Grid.Column="1" Background="{Binding SliderColor}" />
+		    <!--<GridSplitter Grid.Column="1" Background="{Binding SliderColor}" ResizeDirection="Columns" />-->
+            <GridSplitter Grid.Column="1"
+              Width="8"              
+              Classes="pretty-splitter vertical"
+              ResizeDirection="Columns"
+              ResizeBehavior="PreviousAndNext"
+              HorizontalAlignment="Stretch"/>
+
 
             <restpunk:QueryLayout Grid.Column="2" DataContext="{Binding QueryLayout}" />
         </Grid>

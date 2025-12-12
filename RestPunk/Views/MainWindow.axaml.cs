@@ -1,6 +1,7 @@
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Styling;
+using RestPunk.ViewModels;
 
 namespace RestPunk.Views
 {
@@ -12,11 +13,11 @@ namespace RestPunk.Views
             InitializeComponent();
         }
 
-        private void ThemeMenuItem_Click(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
+        private void Window_Closing(object? sender, WindowClosingEventArgs e)
         {
-            if (Application.Current is App app)
+            if (DataContext is MainWindowViewModel vm)
             {
-                app.RequestedThemeVariant = app.ActualThemeVariant == ThemeVariant.Light ? ThemeVariant.Dark : ThemeVariant.Light;
+                vm.Window_Closing(sender, e);
             }
         }
     }
