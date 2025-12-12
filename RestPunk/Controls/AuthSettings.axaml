@@ -14,7 +14,26 @@
 
     <Border BorderThickness="1" BorderBrush="{Binding OutlineColor}" Margin="0,0,0,5" CornerRadius="5">
         <Grid >
-	        
+	        <Grid.ColumnDefinitions>
+				<ColumnDefinition Width="200" />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="5">
+                <Label Content="Auth Type" FontWeight="Bold" />
+                <ComboBox HorizontalAlignment="Stretch" Margin="10,0,0,0"
+                          ItemsSource="{Binding AvailableAuths}"
+                          SelectedValue="{Binding SelectedUserControl}">
+					<ComboBox.ItemTemplate>
+                      <DataTemplate>
+                        <TextBlock Text="{Binding Key}" />
+                      </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+            </StackPanel>
+
+            <ContentControl Grid.Column="1" Content="{Binding CurrentAuthControl}" />
+
         </Grid>
     </Border>
 </UserControl>
